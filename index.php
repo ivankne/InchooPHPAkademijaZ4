@@ -8,24 +8,27 @@
 
 class Employee
 {
-    public $id;
-    public $ime;
-    public $prezime;
-    public $datum;
-    public $spol;
-    public $primanja;
+    protected $id;
+    protected $ime;
+    protected $prezime;
+    protected $datum;
+    protected $spol;
+    protected $primanja;
 
 
     function __construct($id,$ime,$prezime, $datum, $spol, $primanja)
     {
-        $this->setId($id);
-        $this->setIme($ime);
-        $this->setPrezime($prezime);
-        $this->setDatum($datum);
-        $this->setSpol($spol);
-        $this->setPrimanja($primanja);
+
+        $this->id=$id;
+        $this->ime=$ime;
+        $this->prezime=$prezime;
+        $this->datum=$datum;
+        $this->spol=$spol;
+        $this->primanja=$primanja;
     }
 
+
+    //gettere i settere koristim kada var u klasi nisu public! sad ovo ima smisla
     /**
      * @return mixed
      */
@@ -179,20 +182,20 @@ while( true ) {
 
 	function printMenu()
     {
-		echo "************ Zaposlenici ******************\n";
+		echo "************ Zaposlenik ******************\n";
 		echo "1 - Pregled Zaposlenika\n";
 		echo "2 - Unos novog Zaposlenika\n";
 		echo "3 - Promjena podataka postojećem zaposleniku\n";
 		echo "4 - Brisanje Zaposlenika\n";
 		echo "5 - Statistika\n";
 		echo "6 - Izlaz\n";
-		echo "************ Zaposlenici ******************\n";
+		echo "************ Zaposlenik ******************\n";
 		echo "Odaberi 1 do 6 ::";
 	}
 
 
 /**
- * //Pregled Zaposelnika
+ * Pregled Zaposelnika
  *
  */
 
@@ -200,18 +203,21 @@ while( true ) {
     {
         echo "\n";
         for ($i = 0; $i < count($array); $i++) {
-            echo "ID: " . $array[$i]->id . " ";
-            echo "IME: " . $array[$i]->ime . " ";
-            echo "PREZIME: " . $array[$i]->prezime . " ";
-            echo "DATUM ROĐENJA: " . $array[$i]->datum . " ";
-            echo "SPOL: " . $array[$i]->spol . " ";
-            echo "MJESEČNA PRIMANJA: " . $array[$i]->primanja . " ";
+            echo "************ Zaposlenici ******************\n";
+            echo "Zaposlenik: " . $array[$i]->getId() . " \n";
+            echo "ID: " . $array[$i]->getId() . " \n";
+            echo "IME: " . $array[$i]->getIme() . " \n";
+            echo "PREZIME: " . $array[$i]->getPrezime() . " \n";
+            echo "DATUM ROĐENJA: " . $array[$i]->getDatum() . " \n";
+            echo "SPOL: " . $array[$i]->getSpol() . " \n";
+            echo "MJESEČNA PRIMANJA: " . $array[$i]->getPrimanja() . " \n";
+            echo "************ Zaposlenici ******************\n";
         }
         echo "\n";
     }
 
 /**
- * //Unos novog Zaposlenika
+ * Unos novog Zaposlenika
  *
  */
     function insertEmployee()
