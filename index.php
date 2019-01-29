@@ -198,7 +198,7 @@ while( true ) {
 
 /**
  * Pregled Zaposelnika
- *
+ * @param $array Employee[]
  */
 
 	function readEmployee($array)
@@ -242,7 +242,9 @@ while( true ) {
 
 /**
  * //Promjena podataka postojećem zaposleniku
- *
+ * @param $array Employee[]
+ * @param  $employeeId
+ * @return Employee[]
  */
     function editEmployee($array, $employeeId)
     {
@@ -261,17 +263,17 @@ while( true ) {
                 echo "Novo PREZIME: ";
                 $array[$i]->setPrezime(readline());
 
-                echo "Trenutni datum: " . $array[$i]->getDatum() . " \n";
-                echo "Novi datum: ";
-                $array[$i]->setDatum();
+                echo "Trenutni DATUM: " . $array[$i]->getDatum() . " \n";
+                echo "Novi DATUM: ";
+                $array[$i]->setDatum(readline());
 
-                echo "Trenutni spol: " . $array[$i]->getSpol() . " \n";
-                echo "Novi spol: ";
-                $array[$i]->setSpol();
+                echo "Trenutni SPOL: " . $array[$i]->getSpol() . " \n";
+                echo "Novi SPOL: ";
+                $array[$i]->setSpol(readline());
 
-                echo "Trenutna primanja: " . $array[$i]->getPrimanja() . " \n";
-                echo "Nova primanja: ";
-                $array[$i]->setPrimanja();
+                echo "Trenutna PRIMANJA: " . $array[$i]->getPrimanja() . " \n";
+                echo "Nova PRIMANJA: ";
+                $array[$i]->setPrimanja(readline());
             }
         }
         return $array;
