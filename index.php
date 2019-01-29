@@ -6,6 +6,8 @@
  * Time: 13:22
  */
 
+require "controls.php";
+
 class Employee
 {
     protected $id;
@@ -157,7 +159,7 @@ while( true ) {
             }
         case 2:
             {
-                $workers[] = insertEmployee();
+                $workers[] = insertEmployee($workers);
     //pitaj da li hoces jos jednoga unijeti ili zelis izaci na izbornik
                 break;
             }
@@ -170,7 +172,9 @@ while( true ) {
             }
         case 4:
             {
-                deleteEmployee();
+                echo"Unesi ID korisnika za brisanje: ";
+                $employeeId = readline();
+                deleteEmployee($workers, $employeeId);
                 break;
             }
         case 5:
@@ -205,7 +209,7 @@ while( true ) {
     {
         echo "\n";
         for ($i = 0; $i < count($array); $i++) {
-            echo "************ Zaposlenici ******************\n";
+            echo "========== Zaposlenici ==========\n";
             echo "Zaposlenik: " . $array[$i]->getId() . " \n";
             echo "ID: " . $array[$i]->getId() . " \n";
             echo "IME: " . $array[$i]->getIme() . " \n";
@@ -213,7 +217,7 @@ while( true ) {
             echo "DATUM ROĐENJA: " . $array[$i]->getDatum() . " \n";
             echo "SPOL: " . $array[$i]->getSpol() . " \n";
             echo "MJESEČNA PRIMANJA: " . $array[$i]->getPrimanja() . " \n";
-            echo "************ Zaposlenici ******************\n";
+            echo "========== Zaposlenici ==========\n";
         }
         echo "\n";
     }
@@ -222,20 +226,20 @@ while( true ) {
  * Unos novog Zaposlenika
  *
  */
-    function insertEmployee()
+    function insertEmployee($array = NULL)
     {
         echo "ID: ";
-        $id = readline();
+        $id = checkId(readline(), $array);
         echo "Ime: ";
         $ime = readline();
         echo "Prezime: ";
         $prezime = readline();
-        echo "Datum rođenja: ";
-        $datum = readline();
-        echo "Spol: ";
-        $spol = readline();
+        echo "Datum rođenja (dd.mm.YYYY.) :";
+        $datum = validateDate(readline());
+        echo "Spol (M/Z): ";
+        $spol = checkSpol(readline());
         echo "Mjesečna primanja: ";
-        $primanja = readline();
+        $primanja = checkPrimanja(readline());
         return new Employee($id, $ime, $prezime, $datum, $spol, $primanja);
 
     }
@@ -244,7 +248,7 @@ while( true ) {
  * //Promjena podataka postojećem zaposleniku
  * @param $array Employee[]
  * @param  $employeeId
- * @return Employee[]
+ * @return mixed
  */
     function editEmployee($array, $employeeId)
     {
@@ -253,7 +257,7 @@ while( true ) {
 
                 echo "Trenutni ID: " . $array[$i]->getId() . " \n";
                 echo "Novi ID: ";
-                $array[$i]->setId(readline());
+                $array[$i]->setId(checkId(readline(), $array));
 
                 echo "Trenutno IME: " . $array[$i]->getIme() . " \n";
                 echo "Novo IME: ";
@@ -280,16 +284,27 @@ while( true ) {
     }
 
 /**
- * //Brisanje Zaposlenika
- *
+ * Brisanje Zaposlenika
+ * @param $array Employee[]
+ * @param $employeeId
+ * @return mixed
  */
-    function deleteEmployee()
+    function deleteEmployee($array, $employeeId)
     {
+        for ($i = 0; $i <= count($array); $i++) {
 
+        if (isset($array[$i]) && $array[$i]->getId() === $employeeId) {
+            $array[$i] = null;
+            unset($array[$i]);
+        }
+    }
+        echo "Zaposlenik uspješnoo obrisan \n";
+    $array = array_values($array);
+    return $array;
     }
 
 /**
- * //Statistika
+ * Statistika
  *
  */
     function stats()
