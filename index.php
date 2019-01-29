@@ -158,12 +158,14 @@ while( true ) {
         case 2:
             {
                 $workers[] = insertEmployee();
-//                echo "Hello Test\n";
+    //pitaj da li hoces jos jednoga unijeti ili zelis izaci na izbornik
                 break;
             }
         case 3:
             {
-                editEmployee();
+                echo"Unesi ID korisnika za urediti podatke: ";
+                $employeeId = readline();
+                $workers = editEmployee($workers, $employeeId);
                 break;
             }
         case 4:
@@ -242,9 +244,37 @@ while( true ) {
  * //Promjena podataka postojećem zaposleniku
  *
  */
-    function editEmployee()
+    function editEmployee($array, $employeeId)
     {
+        for ($i=0; $i < count($array); $i++) {
+            if ($array[$i]->getId() === $employeeId) {
 
+                echo "Trenutni ID: " . $array[$i]->getId() . " \n";
+                echo "Novi ID: ";
+                $array[$i]->setId(readline());
+
+                echo "Trenutno IME: " . $array[$i]->getIme() . " \n";
+                echo "Novo IME: ";
+                $array[$i]->setIme(readline());
+
+                echo "Trenutno PREZIME: " . $array[$i]->getPrezime() . " \n";
+                echo "Novo PREZIME: ";
+                $array[$i]->setPrezime(readline());
+
+                echo "Trenutni datum: " . $array[$i]->getDatum() . " \n";
+                echo "Novi datum: ";
+                $array[$i]->setDatum();
+
+                echo "Trenutni spol: " . $array[$i]->getSpol() . " \n";
+                echo "Novi spol: ";
+                $array[$i]->setSpol();
+
+                echo "Trenutna primanja: " . $array[$i]->getPrimanja() . " \n";
+                echo "Nova primanja: ";
+                $array[$i]->setPrimanja();
+            }
+        }
+        return $array;
     }
 
 /**
